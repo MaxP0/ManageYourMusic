@@ -9,8 +9,8 @@ package manageyourmusic;
  * @author pylyp
  */
 public interface GenrePlaylistInterface {
-    void addComp(Composition song);
-    void deleteComp(Composition song);
+    void addComp(Composition comp);
+    void deleteComp(Composition comp);
     void printPlaylist();
     int getCompCount();
     void createRepeatablePlaylist();

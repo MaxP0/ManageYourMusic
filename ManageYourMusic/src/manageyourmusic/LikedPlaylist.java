@@ -25,8 +25,8 @@ public class LikedPlaylist implements LikedPlaylistInterface{
         compositions.remove(comp);
     }
 
-    public Composition peekLastAddedComp() {
-        return compositions.isEmpty() ? null : compositions.peek();
+    public Composition popLastAddedSong() {
+        return compositions.isEmpty() ? null : compositions.pop();
     }
 
     public void printPlaylist() {

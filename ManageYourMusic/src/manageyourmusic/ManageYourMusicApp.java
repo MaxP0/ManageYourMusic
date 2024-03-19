@@ -36,9 +36,8 @@ public class ManageYourMusicApp {
         GenrePlaylist genrePlaylist1 = new GenrePlaylist("Genre 1");
 
         // Move the last added song from liked playlist to genre playlist 1
-        Composition lastAddedSong = likedPlaylist.peekLastAddedComp();
+        Composition lastAddedSong = likedPlaylist.popLastAddedSong();
         if (lastAddedSong != null) {
-            likedPlaylist.deleteComp(lastAddedSong);
             genrePlaylist1.addComp(lastAddedSong);
             System.out.println("Moved song '" + lastAddedSong.title + "' to 'Genre 1' playlist.");
         } else {

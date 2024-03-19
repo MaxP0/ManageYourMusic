@@ -27,27 +27,59 @@ public class HomeGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JButton();
+        btnDel = new javax.swing.JButton();
+        btnMove = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Manage Your Music");
 
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAdd.setText("Add");
+
+        btnDel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnDel.setText("Delete");
+
+        btnMove.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnMove.setText("Move to");
+
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnSearch.setText("Search");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(232, Short.MAX_VALUE)
+                .addComponent(btnAdd)
+                .addGap(18, 18, 18)
+                .addComponent(btnDel)
+                .addGap(18, 18, 18)
+                .addComponent(btnSearch)
+                .addGap(18, 18, 18)
+                .addComponent(btnMove)
+                .addGap(228, 228, 228))
             .addGroup(layout.createSequentialGroup()
-                .addGap(275, 275, 275)
+                .addGap(339, 339, 339)
                 .addComponent(jLabel1)
-                .addContainerGap(309, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addContainerGap(390, Short.MAX_VALUE))
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnDel)
+                    .addComponent(btnMove)
+                    .addComponent(btnSearch))
+                .addContainerGap(434, Short.MAX_VALUE))
         );
 
         pack();
@@ -89,6 +121,10 @@ public class HomeGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDel;
+    private javax.swing.JButton btnMove;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

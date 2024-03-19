@@ -9,9 +9,9 @@ package manageyourmusic;
  * @author pylyp
  */
 public interface LikedPlaylistInterface {
-    void addComp(Composition song);
-    void deleteComp(Composition song);
-    Composition peekLastAddedComp();
+    void addComp(Composition comp);
+    void deleteComp(Composition comp);
+    public Composition popLastAddedSong();
     void printPlaylist();
     int getCompCount();
     void createRepeatablePlaylist();

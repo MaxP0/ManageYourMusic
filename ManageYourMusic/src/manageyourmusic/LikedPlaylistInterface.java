@@ -4,15 +4,18 @@
  */
 package manageyourmusic;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author pylyp
  */
 public interface LikedPlaylistInterface {
-    void addComp(Composition comp);
+    void pushComp(Composition comp);
     void deleteComp(Composition comp);
-    public Composition popLastAddedSong();
+    public Composition popComp();
     void printPlaylist();
     int getCompCount();
-    void createRepeatablePlaylist();
+    boolean isEmpty();
+    ArrayList<Composition> search(String keyword);
 }

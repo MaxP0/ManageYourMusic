@@ -4,6 +4,8 @@
  */
 package manageyourmusic;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author pylyp
@@ -13,5 +15,6 @@ public interface GenrePlaylistInterface {
     void deleteComp(Composition comp);
     void printPlaylist();
     int getCompCount();
-    void createRepeatablePlaylist();
+    void setRepeatable();
+    ArrayList<Composition> search(String keyword);
 }

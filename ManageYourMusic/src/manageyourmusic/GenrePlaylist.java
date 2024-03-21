@@ -4,20 +4,25 @@
  */
 package manageyourmusic;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author pylyp
  */
 public class GenrePlaylist implements GenrePlaylistInterface{
     String genre;
-    DoublyLinkedList<Composition> compositions;
+    boolean repeatable = false;
+    DoublylinkedList<Composition> compositions;
+    DoublylinkedList.DoublyLinkedNode<Composition> head; 
 
     public GenrePlaylist(String genre) {
         this.genre = genre;
-        this.compositions = new DoublyLinkedList<>();
+        this.compositions = new DoublylinkedList<>();
+        this.head = null;
     }
 
-    public void addComp(Composition comp) {
+    public void addComp(Composition comp){
         compositions.addLast(comp);
     }
 
@@ -33,8 +38,28 @@ public class GenrePlaylist implements GenrePlaylistInterface{
     public int getCompCount() {
         return compositions.size();
     }
+    
+    public ArrayList<Composition> search(String keyword) {
+        ArrayList<Composition> searchResults = new ArrayList<>();
+        DoublylinkedList.DoublyLinkedNode<Composition> current = compositions.getHead(); // Start from the head of the list
 
-    public void createRepeatablePlaylist() {
-        // Implementation to create a repeatable playlist
+        while (current != null) {
+            Composition comp = current.getData();
+            if (comp.getTitle().contains(keyword) || comp.getArtist().contains(keyword)) {
+                searchResults.add(comp); // Add to search results if keyword is found
+            }
+            current = current.getNext(); // Move to the next node
+        }
+        return searchResults;
+    }
+    
+    public void setRepeatable() {
+        if (!repeatable == false && head != null){
+            head.prev = compositions.tail;
+            compositions.tail.next = head;
+        } else if (repeatable && head != null) {
+            head.prev = null;
+            compositions.tail.next = null;
+        }
     }
 }

@@ -4,29 +4,33 @@
  */
 package manageyourmusic;
 
-import java.util.Stack;
+import java.util.ArrayList;
 
 /**
  *
  * @author pylyp
  */
 public class LikedPlaylist implements LikedPlaylistInterface{
-    Stack<Composition> compositions;
+    ArrayList<Composition> compositions;
 
     public LikedPlaylist() {
-        this.compositions = new Stack<>();
+        compositions = new ArrayList<>();
     }
 
-    public void addComp(Composition comp) {
-        compositions.push(comp);
+    public void pushComp(Composition comp) {
+        compositions.add(0, comp);
     }
 
     public void deleteComp(Composition comp) {
         compositions.remove(comp);
     }
 
-    public Composition popLastAddedSong() {
-        return compositions.isEmpty() ? null : compositions.pop();
+    public Composition popComp() {
+        if (!(compositions.isEmpty())){
+            return compositions.remove(0);
+        }else{
+            return null;
+        }
     }
 
     public void printPlaylist() {
@@ -39,8 +43,18 @@ public class LikedPlaylist implements LikedPlaylistInterface{
     public int getCompCount() {
         return compositions.size();
     }
-
-    public void createRepeatablePlaylist() {
-        // Implementation to create a repeatable playlist
+    
+    public boolean isEmpty(){
+        return compositions.isEmpty();
+    }
+    
+    public ArrayList<Composition> search(String keyword) {
+        ArrayList<Composition> searchResults = new ArrayList<>();
+        for (Composition comp : compositions) {
+            if (comp.title.contains(keyword) || comp.artist.contains(keyword)) {
+                searchResults.add(comp);
+            }
+        }
+        return searchResults;
     }
 }

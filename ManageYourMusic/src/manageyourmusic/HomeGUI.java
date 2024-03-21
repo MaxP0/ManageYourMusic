@@ -27,63 +27,67 @@ public class HomeGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnAdd = new javax.swing.JButton();
-        btnDel = new javax.swing.JButton();
-        btnMove = new javax.swing.JButton();
-        btnSearch = new javax.swing.JButton();
+        btnLikedPlaylist = new javax.swing.JButton();
+        btnPlaylistGenre1 = new javax.swing.JButton();
+        btnPlaylistGenre2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(500, 400));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Manage Your Music");
+        jLabel1.setText("Manage Your Playlists");
 
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnAdd.setText("Add");
+        btnLikedPlaylist.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnLikedPlaylist.setText("Liked Playlist");
+        btnLikedPlaylist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLikedPlaylistActionPerformed(evt);
+            }
+        });
 
-        btnDel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnDel.setText("Delete");
+        btnPlaylistGenre1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnPlaylistGenre1.setText("Genre1 Playlist");
 
-        btnMove.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnMove.setText("Move to");
-
-        btnSearch.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnSearch.setText("Search");
+        btnPlaylistGenre2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnPlaylistGenre2.setText("Genre2 Playlist");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(232, Short.MAX_VALUE)
-                .addComponent(btnAdd)
-                .addGap(18, 18, 18)
-                .addComponent(btnDel)
-                .addGap(18, 18, 18)
-                .addComponent(btnSearch)
-                .addGap(18, 18, 18)
-                .addComponent(btnMove)
-                .addGap(228, 228, 228))
             .addGroup(layout.createSequentialGroup()
-                .addGap(339, 339, 339)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPlaylistGenre1)
+                            .addComponent(btnLikedPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPlaylistGenre2))))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnDel)
-                    .addComponent(btnMove)
-                    .addComponent(btnSearch))
-                .addContainerGap(434, Short.MAX_VALUE))
+                .addGap(85, 85, 85)
+                .addComponent(btnLikedPlaylist)
+                .addGap(38, 38, 38)
+                .addComponent(btnPlaylistGenre1)
+                .addGap(38, 38, 38)
+                .addComponent(btnPlaylistGenre2)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLikedPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLikedPlaylistActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLikedPlaylistActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,10 +125,9 @@ public class HomeGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDel;
-    private javax.swing.JButton btnMove;
-    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnLikedPlaylist;
+    private javax.swing.JButton btnPlaylistGenre1;
+    private javax.swing.JButton btnPlaylistGenre2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

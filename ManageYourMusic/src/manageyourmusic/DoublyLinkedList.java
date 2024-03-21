@@ -8,12 +8,12 @@ package manageyourmusic;
  *
  * @author pylyp
  */
-public class DoublyLinkedList<T> {
-    private DoublyLinkedNode<T> head;
-    private DoublyLinkedNode<T> tail;
-    private int size;
+public class DoublylinkedList<T> {
+    protected DoublyLinkedNode<T> head;
+    protected DoublyLinkedNode<T> tail;
+    protected int size;
 
-    public DoublyLinkedList() {
+    public DoublylinkedList() {
         head = null;
         tail = null;
         size = 0;
@@ -71,16 +71,37 @@ public class DoublyLinkedList<T> {
             current = current.next;
         }
     }
-}
 
-class DoublyLinkedNode<T> {
-    T data;
-    DoublyLinkedNode<T> prev;
-    DoublyLinkedNode<T> next;
-
-    public DoublyLinkedNode(T data) {
-        this.data = data;
-        this.prev = null;
-        this.next = null;
+    public DoublyLinkedNode<T> getHead() {
+        return head;
     }
+
+    public DoublyLinkedNode<T> getTail() {
+        return tail;
+    }
+
+    public static class DoublyLinkedNode<T> {
+        T data;
+        DoublyLinkedNode<T> prev;
+        DoublyLinkedNode<T> next;
+
+        public DoublyLinkedNode(T data) {
+            this.data = data;
+            this.prev = null;
+            this.next = null;
+        }
+
+        public T getData() {
+            return data;
+        }
+
+        public DoublyLinkedNode<T> getPrev() {
+            return prev;
+        }
+
+        public DoublyLinkedNode<T> getNext() {
+            return next;
+        }
+    }
+    
 }

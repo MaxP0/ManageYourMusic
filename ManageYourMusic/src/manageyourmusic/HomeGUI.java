@@ -134,9 +134,6 @@ public class HomeGUI extends javax.swing.JFrame {
     
     private void btnPlaylistGenre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistGenre1ActionPerformed
         // TODO add your handling code here:
-        int count = genrePlaylist1.getCompCount();
-        
-        System.out.println(count);
         setVisible(false);
         Genre1PlaylistGUI genre1PlaylistGUI = new Genre1PlaylistGUI();
         genre1PlaylistGUI.setPlaylists(getLikedPlaylist(), getGenrePlaylist1(), getGenrePlaylist2());
@@ -147,6 +144,7 @@ public class HomeGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         Genre2PlaylistGUI genre2PlaylistGUI = new Genre2PlaylistGUI();
+        genre2PlaylistGUI.setPlaylists(getLikedPlaylist(), getGenrePlaylist1(), getGenrePlaylist2());
         genre2PlaylistGUI.setVisible(true);
     }//GEN-LAST:event_btnPlaylistGenre2ActionPerformed
 

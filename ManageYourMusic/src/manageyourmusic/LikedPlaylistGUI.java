@@ -4,6 +4,9 @@
  */
 package manageyourmusic;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author pylyp
@@ -16,6 +19,8 @@ public class LikedPlaylistGUI extends javax.swing.JFrame {
     LikedPlaylist likedPlaylist;
     GenrePlaylist genrePlaylist1;
     GenrePlaylist genrePlaylist2;
+    ArrayList<String> playlistStr;
+    Composition comp;
     
     public LikedPlaylistGUI() {
         initComponents();
@@ -27,6 +32,16 @@ public class LikedPlaylistGUI extends javax.swing.JFrame {
         this.likedPlaylist = likedPlaylist;
         this.genrePlaylist1 = genrePlaylist1;
         this.genrePlaylist2 = genrePlaylist2;
+        lblSongsCount.setText(String.valueOf(likedPlaylist.getCompCount()));
+        displayPlaylist();
+    }
+    
+    private void displayPlaylist() {
+        textArea.setText("");
+        for (int i = 0; i < likedPlaylist.getCompCount(); i++) {
+            textArea.append(likedPlaylist.compositions.get(i).toString() + "\n");
+            
+        }
     }
 
     /**
@@ -40,13 +55,13 @@ public class LikedPlaylistGUI extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textArea = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         lblSongsCount = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnMove = new javax.swing.JButton();
+        btnDel = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         btnPrint = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -60,9 +75,9 @@ public class LikedPlaylistGUI extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Liked Playlist");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane1.setViewportView(textArea);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Songs");
@@ -78,17 +93,37 @@ public class LikedPlaylistGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton2.setText("Move");
+        btnMove.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnMove.setText("Move");
+        btnMove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveActionPerformed(evt);
+            }
+        });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton3.setText("Del");
+        btnDel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnDel.setText("Del");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton4.setText("Search");
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         btnPrint.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnPrint.setText("Print");
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Title:");
@@ -128,9 +163,9 @@ public class LikedPlaylistGUI extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btnAdd)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton2)
+                                    .addComponent(btnMove)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton3)))
+                                    .addComponent(btnDel)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(tfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -138,7 +173,7 @@ public class LikedPlaylistGUI extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(tfArtist, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
+                        .addComponent(btnSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPrint)
                         .addGap(0, 50, Short.MAX_VALUE))
@@ -178,9 +213,9 @@ public class LikedPlaylistGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
+                    .addComponent(btnMove)
+                    .addComponent(btnDel)
+                    .addComponent(btnSearch)
                     .addComponent(btnPrint))
                 .addGap(25, 25, 25))
         );
@@ -190,14 +225,142 @@ public class LikedPlaylistGUI extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        if(tfTitle.getText().isEmpty() || tfArtist.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "You missed some input lines");
+        }else{
+            String title = tfTitle.getText();
+            String artist = tfArtist.getText();
+                        
+            comp = new Composition(title, artist);
+            likedPlaylist.pushComp(comp);
+            
+            //change songs count
+            lblSongsCount.setText(String.valueOf(likedPlaylist.getCompCount()));
+            
+            //clean input
+            tfTitle.setText("");
+            tfArtist.setText("");
+            
+            //display playlist
+            displayPlaylist();
+            
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
+    public LikedPlaylist getLikedPlaylist() {
+        return likedPlaylist;
+    }
+
+    public GenrePlaylist getGenrePlaylist1() {
+        return genrePlaylist1;
+    }
+
+    public GenrePlaylist getGenrePlaylist2() {
+        return genrePlaylist2;
+    }
+    
+    
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         setVisible(false);
         HomeGUI homeGUI = new HomeGUI();
+        homeGUI.setPlaylists(getLikedPlaylist(), getGenrePlaylist1(), getGenrePlaylist2());
         homeGUI.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
+        // TODO add your handling code here:
+        //Move the last added song from liked playlist to genre playlist
+        String userInput = JOptionPane.showInputDialog(null, "Please enter the number of playlist to move 1)Genre1 2)Genre2");
+        Composition lastAddedSong = likedPlaylist.popComp();
+        System.out.println(lastAddedSong);
+        if ("1".equals(userInput) && lastAddedSong != null) {
+            genrePlaylist1.addComp(lastAddedSong);
+            System.out.println("Moved song '" + lastAddedSong.title + "' to 'Genre 1' playlist.");
+        } else if ("2".equals(userInput) && lastAddedSong != null) {
+            genrePlaylist2.addComp(lastAddedSong);
+            System.out.println("Moved song '" + lastAddedSong.title + "' to 'Genre 2' playlist.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error.");
+        }
+
+        //change songs count
+        lblSongsCount.setText(String.valueOf(likedPlaylist.getCompCount()));
+
+        //display playlist
+        displayPlaylist();
+
+    }//GEN-LAST:event_btnMoveActionPerformed
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        // TODO add your handling code here:
+        if(tfTitle.getText().isEmpty() && tfArtist.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Enter at least one criteria");
+        }else{
+            String keyword;
+            
+            if (!tfTitle.getText().isEmpty()){
+                keyword = tfTitle.getText();
+            }else{
+                keyword = tfArtist.getText();
+            }
+            
+            if(likedPlaylist.search(keyword).isEmpty()){
+                JOptionPane.showMessageDialog(null, "Nothing found");
+            }else{
+                //deleting composition by keyword title either artist
+                likedPlaylist.deleteComp(likedPlaylist.search(keyword).get(0));
+                
+                //change songs count
+                lblSongsCount.setText(String.valueOf(likedPlaylist.getCompCount()));
+
+                //clean input
+                tfTitle.setText("");
+                tfArtist.setText("");
+
+                //display playlist
+                displayPlaylist();
+                
+            }
+        }
+    }//GEN-LAST:event_btnDelActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        if(tfTitle.getText().isEmpty() && tfArtist.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Enter at least one criteria");
+        }else{
+            String keyword;
+            // choosing keyword
+            if (!tfTitle.getText().isEmpty()){
+                keyword = tfTitle.getText();
+            }else{
+                keyword = tfArtist.getText();
+            }
+            
+            ArrayList<Composition> searchRes = new ArrayList<>();
+            searchRes = likedPlaylist.search(keyword);
+            
+            if(searchRes.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Nothing found");
+            }else{
+                textArea.setText("Search results: ");
+                for (int i = 0; i < searchRes.size(); i++){
+                    textArea.append("\n" + searchRes.get(i).toString());
+                }
+
+                //clean input
+                tfTitle.setText("");
+                tfArtist.setText("");
+                
+            }
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        // TODO add your handling code here:
+        displayPlaylist();
+    }//GEN-LAST:event_btnPrintActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,18 +400,18 @@ public class LikedPlaylistGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDel;
+    private javax.swing.JButton btnMove;
     private javax.swing.JButton btnPrint;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblSongsCount;
+    private javax.swing.JTextArea textArea;
     private javax.swing.JTextField tfArtist;
     private javax.swing.JTextField tfTitle;
     // End of variables declaration//GEN-END:variables

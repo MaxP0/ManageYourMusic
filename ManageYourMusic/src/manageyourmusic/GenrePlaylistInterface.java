@@ -13,8 +13,9 @@ import java.util.ArrayList;
 public interface GenrePlaylistInterface {
     void addComp(Composition comp);
     void deleteComp(Composition comp);
-    void printPlaylist();
+    ArrayList<String> getPlaylistStr();
     int getCompCount();
     void setRepeatable();
     ArrayList<Composition> search(String keyword);
+    void printPlaylist();
 }

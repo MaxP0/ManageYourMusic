@@ -4,6 +4,9 @@
  */
 package manageyourmusic;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author pylyp
@@ -13,9 +16,41 @@ public class Genre1PlaylistGUI extends javax.swing.JFrame {
     /**
      * Creates new form Genre1PlaylistGUI
      */
+    LikedPlaylist likedPlaylist;
+    GenrePlaylist genrePlaylist1;
+    GenrePlaylist genrePlaylist2;
+    Composition comp;
+    ArrayList<String> playlistStr;
+    
     public Genre1PlaylistGUI() {
         initComponents();
+        //Center form in screen
+        setLocationRelativeTo(null); 
+        
+
     }
+    
+    public void setPlaylists(LikedPlaylist likedPlaylist, GenrePlaylist genrePlaylist1, GenrePlaylist genrePlaylist2){
+        this.likedPlaylist = likedPlaylist;
+        this.genrePlaylist1 = genrePlaylist1;
+        this.genrePlaylist2 = genrePlaylist2;
+        lblSongsCount.setText(String.valueOf(genrePlaylist1.getCompCount()));
+        displayPlaylist();
+    }
+
+    public LikedPlaylist getLikedPlaylist() {
+        return likedPlaylist;
+    }
+
+    public GenrePlaylist getGenrePlaylist1() {
+        return genrePlaylist1;
+    }
+
+    public GenrePlaylist getGenrePlaylist2() {
+        return genrePlaylist2;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,7 +65,7 @@ public class Genre1PlaylistGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lblSongsCount = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textArea = new javax.swing.JTextArea();
         btnAdd = new javax.swing.JButton();
         btnDel = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
@@ -40,6 +75,8 @@ public class Genre1PlaylistGUI extends javax.swing.JFrame {
         tfArtist = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,9 +89,9 @@ public class Genre1PlaylistGUI extends javax.swing.JFrame {
         lblSongsCount.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblSongsCount.setText("##");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane1.setViewportView(textArea);
 
         btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnAdd.setText("Add");
@@ -66,9 +103,19 @@ public class Genre1PlaylistGUI extends javax.swing.JFrame {
 
         btnDel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnDel.setText("Del");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
         btnSearch.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         tlgRepeatable.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tlgRepeatable.setText("Repeatable");
@@ -101,6 +148,17 @@ public class Genre1PlaylistGUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Artist: ");
 
+        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel5.setText("•");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,10 +171,14 @@ public class Genre1PlaylistGUI extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblSongsCount)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2))))
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBack))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -139,24 +201,27 @@ public class Genre1PlaylistGUI extends javax.swing.JFrame {
                         .addComponent(btnPrint)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tlgRepeatable)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 21, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(lblSongsCount))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addComponent(lblSongsCount)
+                        .addComponent(jLabel1))
+                    .addComponent(btnBack))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(tfArtist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -175,19 +240,122 @@ public class Genre1PlaylistGUI extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        if(tfTitle.getText().isEmpty() || tfArtist.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "You missed some input lines");
+        }else{
+            String title = tfTitle.getText();
+            String artist = tfArtist.getText();
+                        
+            comp = new Composition(title, artist);
+            genrePlaylist1.addComp(comp);
+            
+            //change songs count
+            lblSongsCount.setText(String.valueOf(genrePlaylist1.getCompCount()));
+            
+            //clean input
+            tfTitle.setText("");
+            tfArtist.setText("");
+            
+            //display playlist
+            displayPlaylist();
+            
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
         // TODO add your handling code here:
+        displayPlaylist();
+            
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void tlgRepeatableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlgRepeatableActionPerformed
         // TODO add your handling code here:
+            genrePlaylist1.setRepeatable();
     }//GEN-LAST:event_tlgRepeatableActionPerformed
 
     private void tfTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTitleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfTitleActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        HomeGUI homeGUI = new HomeGUI();
+        homeGUI.setPlaylists(getLikedPlaylist(), getGenrePlaylist1(), getGenrePlaylist2());
+        homeGUI.setVisible(true);
+    }//GEN-LAST:event_btnBackActionPerformed
+    
+    private void displayPlaylist() {
+        playlistStr = genrePlaylist1.getPlaylistStr();
+        textArea.setText("");
+        for (int i = 0; i < playlistStr.size(); i++) {
+            textArea.append(playlistStr.get(i) + '\n');
+        }
+    }
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        // TODO add your handling code here:
+        if(tfTitle.getText().isEmpty() && tfArtist.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Enter at least one criteria");
+        }else{
+            String keyword;
+            
+            if (!tfTitle.getText().isEmpty()){
+                keyword = tfTitle.getText();
+            }else{
+                keyword = tfArtist.getText();
+            }
+            
+            if(genrePlaylist1.search(keyword).isEmpty()){
+                JOptionPane.showMessageDialog(null, "Nothing found");
+            }else{
+                //deleting composition by keyword title either artist
+                genrePlaylist1.deleteComp(genrePlaylist1.search(keyword).get(0));
+                
+                //change songs count
+                lblSongsCount.setText(String.valueOf(genrePlaylist1.getCompCount()));
+
+                //clean input
+                tfTitle.setText("");
+                tfArtist.setText("");
+
+                //display playlist
+                displayPlaylist();
+                
+            }
+        }
+    }//GEN-LAST:event_btnDelActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        if(tfTitle.getText().isEmpty() && tfArtist.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Enter at least one criteria");
+        }else{
+            String keyword;
+            // choosing keyword
+            if (!tfTitle.getText().isEmpty()){
+                keyword = tfTitle.getText();
+            }else{
+                keyword = tfArtist.getText();
+            }
+            
+            ArrayList<Composition> searchRes = new ArrayList<>();
+            searchRes = genrePlaylist1.search(keyword);
+            
+            if(searchRes.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Nothing found");
+            }else{
+                textArea.setText("Search results: ");
+                for (int i = 0; i < searchRes.size(); i++){
+                    textArea.append("\n" + searchRes.get(i).toString());
+                }
+
+                //clean input
+                tfTitle.setText("");
+                tfArtist.setText("");
+                
+            }
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,6 +394,7 @@ public class Genre1PlaylistGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnSearch;
@@ -233,9 +402,10 @@ public class Genre1PlaylistGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblSongsCount;
+    private javax.swing.JTextArea textArea;
     private javax.swing.JTextField tfArtist;
     private javax.swing.JTextField tfTitle;
     private javax.swing.JToggleButton tlgRepeatable;

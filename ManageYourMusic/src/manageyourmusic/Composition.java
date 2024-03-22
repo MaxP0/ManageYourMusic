@@ -12,6 +12,10 @@ public class Composition {
     String title;
     String artist;
 
+    public Composition() {
+    }
+    
+    
     public Composition(String title, String artist) {
         this.title = title;
         this.artist = artist;

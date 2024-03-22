@@ -13,10 +13,24 @@ public class HomeGUI extends javax.swing.JFrame {
     /**
      * Creates new form HomeGUI
      */
+    LikedPlaylist likedPlaylist;
+    GenrePlaylist genrePlaylist1;
+    GenrePlaylist genrePlaylist2;
+    
     public HomeGUI() {
         initComponents();
+        //Center form in screen
+        setLocationRelativeTo(null);
+        
+        
     }
-
+    
+    // to synchronize with changes which were made in others frames
+    public void setPlaylists(LikedPlaylist likedPlaylist, GenrePlaylist genrePlaylist1, GenrePlaylist genrePlaylist2){
+        this.likedPlaylist = likedPlaylist;
+        this.genrePlaylist1 = genrePlaylist1;
+        this.genrePlaylist2 = genrePlaylist2;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,9 +61,19 @@ public class HomeGUI extends javax.swing.JFrame {
 
         btnPlaylistGenre1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnPlaylistGenre1.setText("Genre1 Playlist");
+        btnPlaylistGenre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlaylistGenre1ActionPerformed(evt);
+            }
+        });
 
         btnPlaylistGenre2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnPlaylistGenre2.setText("Genre2 Playlist");
+        btnPlaylistGenre2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlaylistGenre2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,7 +111,44 @@ public class HomeGUI extends javax.swing.JFrame {
 
     private void btnLikedPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLikedPlaylistActionPerformed
         // TODO add your handling code here:
+        setVisible(false);
+        LikedPlaylistGUI likedPlaylistGUI = new LikedPlaylistGUI();
+        likedPlaylistGUI.setPlaylists(likedPlaylist, genrePlaylist1, genrePlaylist2);
+        likedPlaylistGUI.setVisible(true);
+        
+        
     }//GEN-LAST:event_btnLikedPlaylistActionPerformed
+
+    public LikedPlaylist getLikedPlaylist() {
+        return likedPlaylist;
+    }
+
+    public GenrePlaylist getGenrePlaylist1() {
+        return genrePlaylist1;
+    }
+
+    public GenrePlaylist getGenrePlaylist2() {
+        return genrePlaylist2;
+    }
+    
+    
+    private void btnPlaylistGenre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistGenre1ActionPerformed
+        // TODO add your handling code here:
+        int count = genrePlaylist1.getCompCount();
+        
+        System.out.println(count);
+        setVisible(false);
+        Genre1PlaylistGUI genre1PlaylistGUI = new Genre1PlaylistGUI();
+        genre1PlaylistGUI.setPlaylists(getLikedPlaylist(), getGenrePlaylist1(), getGenrePlaylist2());
+        genre1PlaylistGUI.setVisible(true);
+    }//GEN-LAST:event_btnPlaylistGenre1ActionPerformed
+
+    private void btnPlaylistGenre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaylistGenre2ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        Genre2PlaylistGUI genre2PlaylistGUI = new Genre2PlaylistGUI();
+        genre2PlaylistGUI.setVisible(true);
+    }//GEN-LAST:event_btnPlaylistGenre2ActionPerformed
 
     /**
      * @param args the command line arguments

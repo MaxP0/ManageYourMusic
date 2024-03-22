@@ -88,6 +88,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Genre1 Playlist"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlaylistGenre1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnPlaylistGenre2">
       <Properties>
@@ -96,6 +99,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Genre2 Playlist"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlaylistGenre2ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

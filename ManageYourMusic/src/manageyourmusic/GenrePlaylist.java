@@ -29,11 +29,25 @@ public class GenrePlaylist implements GenrePlaylistInterface{
     public void deleteComp(Composition comp) {
         compositions.remove(comp);
     }
-
+    
     public void printPlaylist() {
         System.out.println("Playlist: " + genre);
         compositions.printList();
     }
+    
+    public ArrayList<String> getPlaylistStr() {
+        ArrayList<String> playlistStrings = new ArrayList<>();
+        DoublylinkedList.DoublyLinkedNode<Composition> current = compositions.getHead();
+
+        while (current != null) {
+            Composition comp = current.getData();
+            playlistStrings.add(comp.toString());
+            current = current.getNext();
+        }
+
+        return playlistStrings;
+    }
+    
 
     public int getCompCount() {
         return compositions.size();
@@ -41,14 +55,14 @@ public class GenrePlaylist implements GenrePlaylistInterface{
     
     public ArrayList<Composition> search(String keyword) {
         ArrayList<Composition> searchResults = new ArrayList<>();
-        DoublylinkedList.DoublyLinkedNode<Composition> current = compositions.getHead(); // Start from the head of the list
+        DoublylinkedList.DoublyLinkedNode<Composition> current = compositions.getHead();
 
         while (current != null) {
             Composition comp = current.getData();
             if (comp.getTitle().contains(keyword) || comp.getArtist().contains(keyword)) {
                 searchResults.add(comp); // Add to search results if keyword is found
             }
-            current = current.getNext(); // Move to the next node
+            current = current.getNext();
         }
         return searchResults;
     }

@@ -13,12 +13,12 @@ import java.util.ArrayList;
 public class GenrePlaylist implements GenrePlaylistInterface{
     String genre;
     boolean repeatable = false;
-    DoublylinkedList<Composition> compositions;
-    DoublylinkedList.DoublyLinkedNode<Composition> head; 
+    DoublyLinkedList<Composition> compositions;
+    DoublyLinkedList.DoublyLinkedNode<Composition> head; 
 
     public GenrePlaylist(String genre) {
         this.genre = genre;
-        this.compositions = new DoublylinkedList<>();
+        this.compositions = new DoublyLinkedList<>();
         this.head = null;
     }
 
@@ -37,7 +37,7 @@ public class GenrePlaylist implements GenrePlaylistInterface{
     
     public ArrayList<String> getPlaylistStr() {
         ArrayList<String> playlistStrings = new ArrayList<>();
-        DoublylinkedList.DoublyLinkedNode<Composition> current = compositions.getHead();
+        DoublyLinkedList.DoublyLinkedNode<Composition> current = compositions.getHead();
 
         while (current != null) {
             Composition comp = current.getData();
@@ -55,7 +55,7 @@ public class GenrePlaylist implements GenrePlaylistInterface{
     
     public ArrayList<Composition> search(String keyword) {
         ArrayList<Composition> searchResults = new ArrayList<>();
-        DoublylinkedList.DoublyLinkedNode<Composition> current = compositions.getHead();
+        DoublyLinkedList.DoublyLinkedNode<Composition> current = compositions.getHead();
 
         while (current != null) {
             Composition comp = current.getData();

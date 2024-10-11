@@ -8,12 +8,12 @@ package manageyourmusic;
  *
  * @author pylyp
  */
-public class DoublylinkedList<T> {
+public class DoublyLinkedList<T> {
     protected DoublyLinkedNode<T> head;
     protected DoublyLinkedNode<T> tail;
     protected int size;
 
-    public DoublylinkedList() {
+    public DoublyLinkedList() {
         head = null;
         tail = null;
         size = 0;
